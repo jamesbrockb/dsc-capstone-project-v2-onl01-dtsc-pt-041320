@@ -1,88 +1,85 @@
-# Capstone Project Requirements
+# Capstone
+
 
 ## Introduction
 
-In this lesson, we'll discuss the requirements for our **Capstone Project**!
+In the following notebook we will be uncovering information from a 3 datasets. Particularly, we will be creating a model which explores the likelyhood of a song being associated with the billboard top 100 list based on lyrics. To do this we will be walking through two classification models. The data we will be reviewing provides us with tweets and an emotional responses towards those tweets. What we explore throughout this notebook will help us further understand the words that are associated most commonly with an emotion. We also need to understand their importance / frequency. E.g. Does 'incredible' associate more with negative, positive or neutral emotions. The models will be most helpful for organizations looking to more easily digest consumer feedback when it comes to negative tweets.
 
-## Objectives
+## The Dataset (Obtaining the data)
 
-You will be able to:
+For this project, I'll be working with a telecommunication dataset. This dataset holds information on over 3.3k clients and informs us on whether or not they churn. The dataset is made up of the following columns:
+* tweet_text
+* emotion_in_tweet_is_directed_at
+* is_there_an_emotion_directed_at_a_brand_or_product
 
-* Describe all required aspects of the final project
-* Describe what constitutes a successful project
+## Cleaning Data (Scrub)
+I needed to view the data to make sure there were no null values, random strings and outliers that would impact our information negatively. To do this I needed to:
+* Remove any unnecessary columns that didn't fit what we were solving for (product).
+* Checked for Null values and remove the rows in its entirety.
+* Renaming my columns to be more digestable
+* Dealing with stopwords
+* Seperated my columns into X and y dataframes.
+* X was my tweets and y was my target (emotion).
+* Since churn was in boolean I then converted it to an integer.
 
-## Introduction
 
-Congratulations on making it to the final project! It's been a long journey, but we can finally see the light at the end of the tunnel!
+## Exploring Data
+I wanted to get an understanding of some of the correlations occuring post cleaning my data. I went through and created a few different function that understood how to read tweets given the symbols tweets carry (e.g. @, #, etc.). I created a few wordclouds that helped show me some patterns in the tweets themselves. Some of the things I explored were common words, hashtags, mentions and links. The ones that had more of a takeaway came from the hashtags and common words. The data did not provide all the links and didn't tell us who was frequently '@mentioned' due to privacy restrictions, making this data not important / less meaningful.
 
-![Actual Footage of you seeing the light at the end of the tunnel](https://raw.githubusercontent.com/learn-co-curriculum/dsc-capstone-project-v2/master/end-of-tunnel.gif)
+### Most frequently used words
 
-Now that you've learned everything we have to teach you, it's time to show off and flex your data science muscles with your own **_Capstone Project_**! This project will allow you to showcase everything you've learned as a data scientist to by completing a professional-level data science project of your choosing. This project will be significantly larger than any project you've completed so far, and will be the crown jewel of your portfolio. A strong capstone project is the single most important thing you can do to get the attention of potential employers, so be prepared to put as much effort into this project as possible - the results will be **_worth it!_**
+<img src ="common_words.png">
 
-![Your portfolio brings all the employers to your inbox](https://raw.githubusercontent.com/learn-co-curriculum/dsc-capstone-project-v2/master/milkshake.gif)
 
-## Topic Requirements
+### Most Frequently used hashtags
 
-Your project should develop a data product or analysis related to a single topic. You are completely free to choose any topic that interests you, but keep in mind that you will need to complete this project end-to-end, including sourcing your own data. When choosing a topic, think through these questions:  
+<img src="common_hashtags.png">
 
-* What would I be motivated to work on?
-* What data could I use?
-* How could an individual or organization use my product or findings?
-* What will I be able to accomplish in the time I have available?
-* What challenges do I foresee with this project?
 
-## Technical Requirements
+## Modeling Data
+Finally I needed to model my data. What was most important to me and for any client will be the recall of negative emotions. We needed to first make sure we had a relatively accurate model. Recall expresses the ability to find all relevant instances in a dataset so this needed to be as close to 1 as we could get. Again we wanted to favor the model towards negative emotions.
 
-Your project must meet the following technical requirements:
+I chose to use 2 models. Random Forests and Gridsearch. As we explore the data we will find which model performed the best in regards to (negative emotion) recall. We want to make sure we are more sensitive when it comes to negative emotions.
 
-1. **_No Off-The-Shelf Datasets_**. This project is a chance for you to highlight your critical thinking and data sourcing skills by finding a good dataset to answer a useful question. You _can_ use a pre-existing dataset, but you should consider combining it with other datasets and/or engineering your own features. The goal is to showcase your ability to find and work with data, so just grabbing a squeaky-clean dataset is out of the question.
 
-2. **_Strong Data Exploration, with at least 4 relevant data visualizations._**  There are few skills that impress employers more than the ability to dive into a new dataset and produce engaging visualizations that communicate important information. For this project, anything worth knowing is worth visualizing. Level up your project by digging into more advanced visualization libraries like seaborn!
+Random Forests
 
-3. **_Makes use of Supervised Learning_**. It is great to use **_Unsupervised Learning_** techniques as needed in your project (for instance, segmentation with clustering algorithms), but supervised learning should play a central role in answering your question. 
+<img src="random.png">
 
-4. **_Explicitly makes use of a Data Science Process such as OSEMN or CRISP-DM_**. Select a Data Science Process to use to give structure to your project. Each step in the process should correspond to a section in your Jupyter Notebook.  
 
-5. **_A well-defined goal with clearly presented results._** Your project should provide any background context needed to understand the project you are working on and why it's important. For instance, if you are trying to detect fault lines using Earthquake data, you should review the topic and your dataset so that the reader can understand your work.  Similarly, the results of your project should be clearly communicated. Do not just tell your audience the final accuracy of your models--be sure to answer "big picture" questions as well. For instance: Would you recommend shipping this model to production, or is more work needed? 
+GridSearchCV
 
-**_NOTE:_** Inconclusive results are okay--from a purely scientific perspective, they are no more or less important or valuable than any other kinds of results. If your results are inconclusive, you should discuss what your next steps would be from there. For instance, what do you think it would take to get conclusive results--more data? Different data that was unavailable? Both? 
+<img src="grid.png">
 
-## Requirements for Online Students Only
 
-### Deliverables
+Another key element was taking a look at which words appeared most frequently, something we also address as its importance in the data set which are provided below.
 
-For online students, the deliverables for this project consist of the following three components:
 
-1. A Jupyter notebook for a presentation.
-  * The Jupyter notebook will have two components:
-    1. An **_Abstract_** section that briefly explains your problem, your methodology, and your findings, and business recommendations as a result of your findings. This section should be 1-2 paragraphs long.  
-    2. The technical analysis for a data science audience. This detailed technical analysis should explicitly follow a Data Science Process as outlined in the previous section. It should be well-formatted and organized, and should contain all code, visualizations, and detailed explanations/analysis.
-    
-2. An organized **README.md** file in the GitHub repository containing your project code that describes the contents of the repository. This file should be the source of information for navigating through all the code in your repository. 
-    
-3. A blog post showcasing your project, with a focus on your methodology and findings. A well-written blog post about your project will probably be the first thing most recruiters and hiring managers see, so really take the time to polish up this blog post and explain your project, methodology, and findings/business recommendations in a clear, concise manner. This blog post should cover everything important about your project, but remember that your audience for this blog post will largely be non-technical. Your blog post should definitely contain visualizations, code snippets, and anything else you find important, but don't get bogged down trying to explain highly technical concepts. Your blog post should provide a link to the Github repository containing your actual project, for people that want to really dive into the technical aspects of your project.
-* Refer back to the [Blogging Guidelines](https://github.com/learn-co-curriculum/dsc-welcome-blogging) for the technical requirements and blog ideas.
+### Feature Importance (Random Forest)
 
-### Rubric 
+<img src="rff.png">
 
-Online students can find a PDF of the rubric for the final capstone project [here](https://github.com/learn-co-curriculum/dsc-capstone-project-v2/blob/master/online_capstone_project_rubric.pdf).
+### Feature Importance (GridSearchCV)
 
-## Requirements for On-Campus Students Only
+<img src="gridf.png">
 
-For on-campus students, your project will be evaluated based on the contents of your GitHub repo, which must contain the following three components:
+### Top 30 Words Associated with Emotion
+Finally we built further onto the model to explore what words were associate with each emotion. Below is a key to help distinguish the dataframe you see below.
 
-1. A Jupyter notebook     
-2. An **README.md** file 
-3. Presentation slides
+Negative Emotion: 0 
+Neutral Emotion: 1
+Positive Emotion: 2
 
-The requirements for these components are described in detail in the rubric for the final capstone project [here](https://docs.google.com/spreadsheets/d/1YUC5_QVu8BEd7xBJumzspH40-KuJtL9KQInQYXGi5bE/edit?usp=sharing). You can learn how your teacher will use the rubric to review the project [here](https://github.com/learn-co-curriculum/dsc-campus-capstone-project-review).
+<img src="top_words.png">
 
-## Example Student Project
 
-Take a look at this [technical report](https://github.com/paulinaczheng/twitter_flu_tracking) from a Flatiron student that used tweet data to predict the weekly number of flu cases during flu season. Pay attention to how well structured the project is, and how much she relies on great visualizations to tell her story for her. Your explanations don't have to be wordy - a visualization is worth a thousand words!
 
-## Summary
+## Conclusion
 
-The Capstone Project is the most critical part of the program. It gives you a chance to bring together all the skills you've learned into realistic projects and to practice key "business judgement" and communication skills.  Most importantly, it provides employers with strong signal about your technical abilities, and allow you to show the world what an amazing Data Scientist you've become!
+Following the exploration of the dataset we can conclude on a few things. That our model performed well and it performed well when it came to the recall of negative emotions. Which in this instance we want to be more sensitive towards. It speaks to itself, but a company would rather hear more about negative comments than positive so they can improve their business.
 
-The projects are serious and important - they can be passed and they can be failed. Take the project seriously, put the time in, ask for help from your peers or instructors early and often if you need it, and treat the review as a job interview and you'll do great. We're rooting for you to succeed and we're only going to ask you to take a review again if we believe that you need to. We'll also provide open and honest feedback so you can improve as quickly and efficiently as possible.
+There are some obvious words that associate with negative emotion, like 'sucks' but the runner ups were words like 'design'. From a client perspective, you'd want to dig more into the underlying problems with design and maybe single out tweets that included design and were negative. This way a business can tweak where things went wrong for the consumer.
+
+
+We can recommend to anyone looking to leverage a model like the above is to exlore the patterns you normally see with your consumer base. Is it always positive, is it always negative or is it neutral. From here you can really slice and dice the model the perform in a way that would allow you to take a deeper dive into your consumer base. For the context of this model it will help pull / identify negative tweets for the client.
+
