@@ -43,14 +43,22 @@ Once I grabbed the data, I then needed to view the data to make sure there were 
 
 ## Exploring Data
 I wanted to get an understanding of some of the correlations occuring post cleaning my data. I went through and created a wordcloud to help show us the frequency of the lyrics that appear in the top 100. I also created a swarm / bar plot hybrid comrpised of the genres and how they matched up against being in the top 100. The largest takeaway was that Country, Pop and Rap / Hip Hop had largest correlations to being in the top 100 in all of the three categories mentioned previously.
-### Most frequently used Lyrics
+### Most frequently used Lyrics in BB Top 100
 
-<img src ="common_words.png">
+<img src ="wc_not100.png">
 
+### Most frequently used Lyrics not in BB Top 100
 
-### Most Frequently used hashtags
+<img src="wc_top100.png">
 
-<img src="common_hashtags.png">
+### Most Frequently Paired Lyrics in BB Top 100
+
+<img src="bigram_top100.png">
+
+### Most Frequently Paired Lyrics in BB Top 100
+
+<img src="bigram_not100.png">
+
 
 
 ## Modeling Data
@@ -61,16 +69,16 @@ I chose to use 3 models. Random Forests, XGB and SVM. As we explore the data we 
 
 Random Forests
 
-<img src="random.png">
+<img src="rf.png">
 
 
 XGB
 
-<img src="grid.png">
+<img src="xgb.png">
 
 SVM
 
-<img src="grid.png">
+<img src="best_model.png">
 
 
 Another key element was taking a look at which lyric appeared most frequently, something we also address as its importance in the data set which are provided below.
@@ -78,21 +86,15 @@ Another key element was taking a look at which lyric appeared most frequently, s
 
 ### Feature Importance (Random Forest)
 
-<img src="rff.png">
+<img src="rfft.png">
 
 ### Feature Importance (XGB)
 
-<img src="gridf.png">
+<img src="xgbft.png">
 
-### Top 30 Words Associated with Emotion
-Finally we built further onto the model to explore what words were associate with each emotion. Below is a key to help distinguish the dataframe you see below.
+### Feature Importance (SVM)
 
-Negative Emotion: 0 
-Neutral Emotion: 1
-Positive Emotion: 2
-
-<img src="top_words.png">
-
+<img src="model_lyric_importance.png">
 
 
 ## Conclusion
